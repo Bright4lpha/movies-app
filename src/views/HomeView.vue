@@ -1,8 +1,6 @@
 <template>
-  <v-container>
-    <MovieList />
-
-  </v-container>
+  <MovieList @showMovieDetailEmit="showMovieDetailEmit" />
+  <MovieDetail v-if="showMovieDetail" :movieId="movieId" @close="closeDetail" />
 </template>
 
 <script>
@@ -17,6 +15,22 @@ export default {
     MoviePagination,
     MovieDetail,
     MovieSearch,
-  }
+  },
+
+  data() {
+    return {
+      movieId: null,
+      showMovieDetail: false,
+    };
+  },
+  methods: {
+    showMovieDetailEmit(movieId) {
+      this.movieId = movieId;
+      this.showMovieDetail = true;
+    },
+    closeDetail() {
+      this.showMovieDetail = false;
+    },
+  },
 };
 </script>

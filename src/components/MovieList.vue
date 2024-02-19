@@ -27,9 +27,12 @@
                 </p>
               </v-card-text>
               <v-card-actions>
-                <v-btn class="text font-weight-bold" color="teal-accent-4"
-                  >Plus d'informations</v-btn
-                >
+                <v-btn
+                  class="text font-weight-bold"
+                  color="teal-accent-4"
+                  @click="sendMovie(movie.id)"
+                >Plus d'informations
+                </v-btn>
               </v-card-actions>
             </v-col>
           </v-row>
@@ -65,6 +68,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    sendMovie(id) {
+      this.$emit("showMovieDetailEmit", id);
+    },
   },
 };
 </script>
