@@ -1,30 +1,42 @@
 <template>
-  <div class="movieList">
-    <!-- list of movies -->
-    <v-row>
-      <v-col
-        v-for="movie in movies.results"
-        :key="movie.id"
-        cols="12"
-        sm="6"
-        md="4"
-        lg="4"
-      >
-        <v-card>
-          <v-img :src="photo_path + movie.poster_path" alt="movie poster" />
-          <h3>{{ movie.title }}</h3>
-        </v-card>
-      </v-col>
-    </v-row>
-    <!-- <ul>
-      <li v-for="movie in movies.results">
-        <v-card>
-            <img :src="photo_path + movie.poster_path" alt="movie poster" />
-            <h3 class="movieList">{{ movie.title }}</h3>
-        </v-card>
-      </li>
-    </ul> -->
-  </div>
+  <!-- list of movies -->
+  <v-row>
+    <v-col v-for="movie in movies.results" :key="movie.id" cols="3">
+      <v-card class="mx-auto" max-width="auto" height="475" theme="dark">
+        <v-container>
+          <v-row>
+            <v-col>
+              <v-img
+                height="300px"
+                :src="photo_path + movie.poster_path"
+                alt="movie poster"
+              ></v-img>
+              <v-card-title class="text-h5">{{ movie.title }}</v-card-title>
+              <v-card-text class="text-subtitle-1">
+                <!-- truncate -->
+                <p>
+                  <!-- {{ movie.overview.length > 45
+                    ? movie.overview.substring(0, 45) + "..."
+                    : movie.overview }} -->
+                  {{
+                    movie.overview.length < 1
+                      ? movie.overview +
+                        "______________________________________"
+                      : movie.overview.substring(0, 40) + "..."
+                  }}
+                </p>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn class="text font-weight-bold" color="teal-accent-4"
+                  >Plus d'informations</v-btn
+                >
+              </v-card-actions>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -48,7 +60,7 @@ export default {
       })
       .then((response) => {
         this.movies = response.data;
-        console.log(this.movies.results);
+        console.log(response.data.results);
       })
       .catch((error) => {
         console.log(error);

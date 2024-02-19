@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-container>
     <MovieList />
-  </div>
 
+  </v-container>
 </template>
 
 <script>
