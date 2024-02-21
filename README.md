@@ -1,4 +1,5 @@
 # movies-app
-Movies APP using THE MovieDB API For VueJS Courses
+Movies APP using The MovieDB API For VueJS Courses
 
 HENRION Mathilde
+BUT 2 APP
