@@ -1,7 +1,7 @@
 <template>
   <!-- list of movies -->
   <v-row>
-    <v-col v-for="movie in movies.results" :key="movie.id" cols="3">
+    <v-col v-for="movie in movieFiltered.results" :key="movie.id" cols="3">
       <v-card class="mx-auto" max-width="auto" height="475" theme="dark">
         <v-container>
           <v-row>
@@ -31,7 +31,7 @@
                   class="text font-weight-bold"
                   color="teal-accent-4"
                   @click="sendMovie(movie.id)"
-                >Plus d'informations
+                  >Plus d'informations
                 </v-btn>
               </v-card-actions>
             </v-col>
@@ -45,6 +45,7 @@
 <script>
 const config = require("../config.json");
 import axios from "axios";
+import _ from "lodash";
 
 export default {
   name: "MoviesList",
@@ -72,6 +73,20 @@ export default {
   methods: {
     sendMovie(id) {
       this.$emit("showMovieDetailEmit", id);
+    },
+  },
+  props: {
+    search: String,
+  },
+  computed: {
+    movieFiltered: function () {
+      // return this.movies.filter((movie) => {
+      //   return movie.title.toLowerCase().includes(this.search.toLowerCase());
+      // });
+      return _.filter(this.movies, (movie) => {
+        return movie.title.toLowerCase().includes(this.search.toLowerCase());
+      });
+      // return this.movies;
     },
   },
 };

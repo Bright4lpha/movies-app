@@ -1,5 +1,21 @@
 <template>
-  <MovieList @showMovieDetailEmit="showMovieDetailEmit" />
+  <v-container>
+    <v-row>
+      <v-col>
+        <MovieSearch @searchMovieEmit="setMovieEmit" />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <MoviePagination />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <MovieList @showMovieDetailEmit="showMovieDetailEmit" />
+      </v-col>
+    </v-row>
+  </v-container>
   <MovieDetail v-if="showMovieDetail" :movieId="movieId" @close="closeDetail" />
 </template>
 
@@ -21,7 +37,11 @@ export default {
     return {
       movieId: null,
       showMovieDetail: false,
+      search: null,
     };
+  },
+  props: {
+    search: String,
   },
   methods: {
     showMovieDetailEmit(movieId) {
@@ -30,6 +50,10 @@ export default {
     },
     closeDetail() {
       this.showMovieDetail = false;
+    },
+    setMovieEmit(search) {
+      this.search = search;
+      console.log(this.search);
     },
   },
 };
