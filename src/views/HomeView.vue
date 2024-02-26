@@ -37,7 +37,6 @@ export default {
     return {
       movieId: null,
       showMovieDetail: false,
-      search: null,
     };
   },
   props: {

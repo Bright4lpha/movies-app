@@ -1,7 +1,7 @@
 <template>
   <!-- list of movies -->
   <v-row>
-    <v-col v-for="movie in movieFiltered.results" :key="movie.id" cols="3">
+    <v-col v-for="movie in this.movies" :key="movie.id" cols="3">
       <v-card class="mx-auto" max-width="auto" height="475" theme="dark">
         <v-container>
           <v-row>
@@ -80,13 +80,7 @@ export default {
   },
   computed: {
     movieFiltered: function () {
-      // return this.movies.filter((movie) => {
-      //   return movie.title.toLowerCase().includes(this.search.toLowerCase());
-      // });
-      return _.filter(this.movies, (movie) => {
-        return movie.title.toLowerCase().includes(this.search.toLowerCase());
-      });
-      // return this.movies;
+      return this.movies;
     },
   },
 };
